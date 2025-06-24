@@ -5,7 +5,9 @@ spring:
   application:
     name: sipwm-acd-poc
   datasource:
-    url: jdbc:h2:mem:paymentdb
+    url: jdbc:h2:mem:sipwm-acd-poc-dev-mem;DB_CLOSE_DELAY=-1;INIT=CREATE SCHEMA IF NOT EXISTS ${variables.DB_SCHEMA}
+    hikari:
+      schema: ${variables.DB_SCHEMA}
     username: sa
     password:
     driver-class-name: org.h2.Driver
@@ -17,3 +19,19 @@ spring:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
       ddl-auto: create-drop
+    properties:
+      hibernate:
+        default_schema: ${variables.DB_SCHEMA}
+    generate-ddl: true
+
+logging:
+  level:
+    be.fgov.minfin.sipwmacdpocdev: DEBUG
+    org.springframework.transaction: DEBUG
+    org.springframework.orm.jpa: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.springframework.web: DEBUG
+    org.springframework.beans: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
