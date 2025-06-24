@@ -33,7 +33,6 @@ public class PaymentApplicationService implements CreatePaymentUseCase {
     }*/
 
     @Override
-    @Transactional
     public Payment createPayment(BigDecimal amount) {
         // Utilise le service de domaine pour créer une commande
         Payment newPayment = paymentService.createPayment(amount);
