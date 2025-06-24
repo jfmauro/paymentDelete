@@ -1,0 +1,26 @@
+spring:
+  application:
+    name:  sipwm-acd-poc
+  datasource:
+    url: Injected through ConfigMap
+    username: Injected through ConfigMap
+    password: Injected through Secret
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate  # Changé de 'none' à 'validate' pour permettre la validation du schéma
+    properties:
+      hibernate:
+        connection:
+          handling_mode: DELAYED_ACQUISITION_AND_RELEASE_AFTER_STATEMENT
+
+logging:
+  level:
+    org.springframework: info
+    org.springframework.web: trace
+    org.springframework.ws: debug
+
+server:
+  max-http-request-header-size: 24KB
+  servlet:
+    context-path: /sipwm-acd-poc
